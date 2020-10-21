@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SubredditActivityVisualizer.Application.Services;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -9,15 +10,11 @@ namespace SubredditActivityVisualizer.ConsoleApp
    {
       static async Task Main(string[] args)
       {
-         using (var httpClient = new HttpClient())
-         {
-            var subreddit = Console.ReadLine();
-            var httpResponseMessage = await httpClient.GetAsync($"https://www.reddit.com/r/{subreddit}/about.json");
-            var responseContent = await httpResponseMessage.Content.ReadAsStringAsync();
-            var subredditAboutResponse = JsonConvert.DeserializeObject<SubredditAboutResponse>(responseContent);
+         var subreddit = Console.ReadLine();
+         var service = new GetSubscribersService();
+         var subscribers = await service.GetAsync(subreddit);
 
-            Console.WriteLine(subredditAboutResponse.Data.Subscribers);
-         }
+         Console.WriteLine(subscribers);
       }
    }
 }
