@@ -7,10 +7,16 @@ namespace SubredditActivityVisualizer.Website.Controllers
 {
    public class SubscribersController : Controller
    {
+      private readonly IGetSubscribersService _getSubscribersService;
+
+      public SubscribersController(IGetSubscribersService getSubscribersService)
+      {
+         _getSubscribersService = getSubscribersService;
+      }
+
       public async Task<IActionResult> Index(string subreddit)
       {
-         var service = new GetSubscribersService();
-         var subscribers = await service.GetAsync(subreddit);
+         var subscribers = await _getSubscribersService.GetAsync(subreddit);
 
          var viewModel = new SubscribersViewModel
          {

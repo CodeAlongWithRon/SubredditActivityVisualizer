@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SubredditActivityVisualizer.Application;
 
 namespace SubredditActivityVisualizer.Website
 {
@@ -19,6 +20,7 @@ namespace SubredditActivityVisualizer.Website
       public void ConfigureServices(IServiceCollection services)
       {
          services.AddControllersWithViews();
+         DependencyRegistration.RegisterDependencies(services);
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

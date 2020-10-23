@@ -10,11 +10,11 @@ namespace SubredditActivityVisualizer.ConsoleApp
    {
       static async Task Main(string[] args)
       {
-         var subreddit = Console.ReadLine();
-         var service = new GetSubscribersService();
-         var subscribers = await service.GetAsync(subreddit);
+         //var subreddit = Console.ReadLine();
+         //var service = new GetSubscribersService();
+         //var subscribers = await service.GetAsync(subreddit);
 
-         Console.WriteLine(subscribers);
+         //Console.WriteLine(subscribers);
       }
    }
 }
