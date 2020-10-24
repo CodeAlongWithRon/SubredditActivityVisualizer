@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SubredditActivityVisualizer.Application.Services;
 using SubredditActivityVisualizer.Website.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace SubredditActivityVisualizer.Website.Controllers
@@ -16,6 +17,11 @@ namespace SubredditActivityVisualizer.Website.Controllers
 
       public async Task<IActionResult> Index(string subreddit)
       {
+         if (string.IsNullOrWhiteSpace(subreddit))
+         {
+            throw new ArgumentNullException(nameof(subreddit));
+         }
+
          var subscribers = await _getSubscribersService.GetAsync(subreddit);
 
          var viewModel = new SubscribersViewModel
